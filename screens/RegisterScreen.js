@@ -36,7 +36,7 @@ const RegisterScreen = () => {
         return (
           <View>
             <Text style={styles.step}>PASO 1/3</Text>
-            <Text style={styles.title}>Valida tu Correo</Text>
+            <Text style={styles.title}>Validar el Correo</Text>
             <Text style={styles.label}>Correo Electrónico</Text>
             <TextInput
               style={styles.input}
