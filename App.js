@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import DashboardScreen from './screens/DashboardScreen';
-import ProyectosScreen from './screens/Proyectos';
+import ProyectosScreen from './screens/ProyectosScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
