@@ -220,8 +220,8 @@ const ProyectosScreen = () => {
                         <Image source={require('../assets/Logo.png')} style={styles.logo} />
                     </View>
                     <View style={styles.navMenu}>
-                        <NavIcon name="grid" label="Dashboard" />
-                        <NavIcon name="folder" label="Proyectos" isSelected={true} />
+                        <NavIcon name="grid" label="Dashboard" isSelected={true} />
+                        <NavIcon name="folder" label="Proyectos" />
                         <NavIcon name="calendar" label="Calendario" />
                         <NavIcon name="airplane" label="Leads" />
                         <NavIcon name="people" label="Empleados" />
