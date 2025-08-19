@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Platform, Image } from 'react-native';
 import RegisterProgress from '../components/auth/RegisterProgress';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useNavigation } from '@react-navigation/native';
 
 const RegisterScreen = () => {
+  const navigation = useNavigation();
   const [currentStep, setCurrentStep] = useState(0);
 
   // Paso 1
@@ -29,7 +31,44 @@ const RegisterScreen = () => {
   const nextStep = () => setCurrentStep((step) => Math.min(step + 1, 3));
   const prevStep = () => setCurrentStep((step) => Math.max(step - 1, 0));
 
-  // Renderizar contenido según el paso
+  // Función para registrar usuario
+  const handleRegister = async () => {
+    if (password !== confirmPassword) {
+      alert("Las contraseñas no coinciden");
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:5000/api/users/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          password,
+          phone,
+          countryCode,
+          serviceUse,
+          jobTitle,
+          hasExperience,
+          companyName,
+          businessArea,
+          teamSize
+        })
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert("Usuario registrado correctamente");
+        navigation.navigate('Login'); 
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      alert("Error en el registro");
+    }
+  };
+
   const renderStepContent = () => {
     switch (currentStep) {
       case 0:
@@ -202,7 +241,7 @@ const RegisterScreen = () => {
               <TouchableOpacity style={styles.prevButton} onPress={prevStep}>
                 <Text style={styles.buttonText}>← Anterior</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.nextButton} onPress={nextStep}>
+              <TouchableOpacity style={styles.nextButton} onPress={() => setCurrentStep(3)}>
                 <Text style={styles.nextButtonText}>Siguiente →</Text>
               </TouchableOpacity>
             </View>
@@ -218,7 +257,7 @@ const RegisterScreen = () => {
             <Text style={styles.successText}>¡Te has registrado correctamente!</Text>
             <TouchableOpacity
               style={styles.nextButton}
-              onPress={() => navigation.navigate('Login')}
+              onPress={handleRegister} // <-- registra y redirige
             >
               <Text style={styles.nextButtonText}>Comenzar →</Text>
             </TouchableOpacity>

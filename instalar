@@ -1,0 +1,2 @@
+npm install express mongoose cors body-parser bcryptjs jsonwebtoken 
+npm install bcryptjs

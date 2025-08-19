@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -10,11 +11,26 @@ const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigation = useNavigation();
 
-  const handleLogin = () => {
-    // Lógica para iniciar sesión
-    console.log('Usuario:', email);
-    console.log('Contraseña:', password);
-  };
+  const handleLogin = async () => {
+  try {
+    const response = await fetch('http://localhost:5000/api/users/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      navigation.navigate('Dashboard');
+    } else {
+      alert(data.message);
+    }
+  } catch (error) {
+    console.log(error);
+    alert("Error al iniciar sesión");
+  }
+};
+
 
   return (
     <View style={styles.container}>
