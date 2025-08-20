@@ -1,0 +1,12 @@
+npx expo install @react-navigation/native-stack
+npm install @react-native-async-storage/async-storage
+CREACION DE  FilterModal.js dentro de components
+
+npx expo install react-native-screens react-native-safe-area-context
+Para los componentes de navegacion 
+
+npm install @react-native-community/slider
+Para menejar la seleccion de rango de tiempo
+
+npm install react-native-responsive-fontsize
+Para que sea responsive
